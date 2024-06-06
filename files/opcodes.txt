@@ -1,0 +1,25 @@
+Updated 04/06/24
+
+Sanny Builder 3/data/sa_mobile/SASCM.ini
+
+; MenuBase
+
+0F50=1,process_lib deltaMs %1d%
+0F51=3,%3g% = get_draw_item_info %1d% id %2d%
+0F52=2,send_touch_state %1d% state %2d%
+0F53=1,add_log_message %1d%
+0F54=5,%5d% = menu_add_window gxt_id %1d% x %2f% y %3f% width %4f%
+0F55=1,menu_remove_window %1d%
+0F56=5,%5d% = menu_add_button gxt_id %1d% to_window %2d% num1 %3d% num2 %4d%
+0F57=2,%2d% = menu_is_button_just_pressed %1d%
+
+
+GiroflexVSL starts at 0EF0
++10 = 0F00
++10 = 0F10
++10 = 0F20
+ModPolicia starts at 0F20
++10 = 0F30
++10 = 0F40
++10 = 0F50
+MenuBase starts at 0F50

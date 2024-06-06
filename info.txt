@@ -1,0 +1,189 @@
+---------------------------
+To release
+
+Check logs
+Check Mod::m_Version
+Check EN and PT .fxt
+Check .fxt mod version (EN and PT)
+Check game more than once to make sure
+Check if config is saving
+
+Change version file in the .zip
+
+TODO
+
+Check Todo to see if all changes are correcly documented
+
+README
+
+Change readme EN and PT if necessary
+
+---------------------------
+Todo
+
+[0.1.0]
+Initial release
+
+[0.2.0]
+[X] ADD: scorch do police department
+[X] ADD: pullover on foot, and on car
+[X] ADD: pullover vehicles
+[X] ADD: frisk vehicles
+[X] UPDATE: rework on ped frisk system
+[X] ADD: new items: Beer, Revolver 38, Pistol
+
+[0.3.0]
+[X] CHANGE: button to pullover
+[X] ADD: a chase gets started if a car has illegal stuff
+[X] ADD: a chase gets started if a car is stolen
+[X] ADD: option to verify if vehicle is stolen
+[X] ADD: option to verify if ped is wanted
+[X] ADD: multiple different police departments
+
+[0.3.1]
+[X] ADD: english version
+[X] FIX: crash when frisking vehicle after its owner left the vehicle during a chase (yes very specific)
+[X] FIX: menu issue: accidentally selecting an opting when menu open (need to add a check if its first touch release)
+[X] FIX: widget 7 is constantly beeing pressed wtf, like SERIOUESLY WTF (wait if fixed by itself ??)
+[X] ADD: config
+
+[0.4.0]
+[X] ADD: backup units ROCAM and vtr
+[X] CHANGE: pull over peds by aiming
+[X] FIX: you can now pull all peds
+[X] ADD: option to ask for suspect to wait there
+[X] ADD: callouts system
+[X] ADD: assault callout
+[X] ADD: customize chances in settings.ini
+
+[0.4.1]
+[X] FIX: bug when killing the suspect being scorched
+[X] FIX: callouts in the middle of a pullover or of another callout
+[X] FIX: bug beeing unable to pullover a ped after you ask him to leave the car and wait there
+
+[0.5.0]
+[X] ADD: option to call vehicle to scorch suspect
+[X] ADD: option to teleport suspect to prision
+[X] ADD: helicopter backup 
+[X] CHANGE: menu colors
+[X] ADD: gang shots fired callout
+[X] FIX: backup cars stand still if chase ends
+
+[0.6.0]
+[X] ADD: police car menu
+[X] ADD: scorch more than one ped to pd
+[X] FIX: crash when removing window from vector (im so stupid for let this happen, but im more impressed it only crashed after 7 releases)
+[X] FIX: scorch vehicle leaves when ped dies or becomes undefined
+[X] ADD: backup for callouts
+[X] FIX: 2 + horn
+[X] ADD: variety of skins
+[X] ADD: callout: stolen vehicle
+[X] issue ticket
+[X] FIX: car not driving after you free him from pullover
+
+[0.7.0]
+[X] ADD: log levels and different files
+[X] FIX: lapdm1 coming with wrong skin
+[X] ADD: multiple passengers in backup with custom weapons
+[X] CHANGE: inisection
+[X] FIX: backup going to old criminal position
+[X] ADD: tow truck
+[X] ADD: option to disable mod
+[X] ADD: money to ped wallet
+[X] FIX: blip doesnt get removed when backup dies
+
+[1.0.0]
+[X] ADD: sounds
+[X] ADD: callout: house invasion
+[X] ADD: items: stolen watch, stolen wallet
+[X] ADD: voice lines during chase and backup
+[X] ADD: IML
+[X] ADD: Ambulance
+[X] ADD: IML taking pictures
+[X] ADD: copy info from ped + copy inventory
+[X] ADD: window radio
+[X] ADD: abort callout
+
+[1.0.1]
+[X] FIX: some users reported not beeing able to pull over cars
+
+[1.0.2]
+[X] ADD: more sounds
+[X] ADD: TTS sounds
+[X] FIX: IML and Ambulance coming too fast
+
+--------------------------
+Notes:
+
+[X] Changed callout chances
+[X] Mention the radio sounds credits
+[X] Remove test audios
+
+---------------------------
+Sugestoes:
+
+[X] adicionar novas delegacias
+[ ] aniação mão pra tras
+[ ] add spikes during chase
+[ ] add roadblocks
+[X] call helicopter
+[ ] colocar animação para colocar as mãos para trás
+[X] opção para chamar viatura até o local e levar o suspeito
+[ ] adicionar radio COPOM, com audios, para consultar RG etc
+[ ] issue ticket to ped/vehicle / multa
+[ ] chamar IML
+[ ] chamar ambulancia
+[ ] nas ocorrências, automaticamente designar viaturas perto do local, sem precisar chamar reforços
+[ ] chamar bombeiros se houver uma explosão dos veículos e junto vim os dois caminhões do jogo e mais o veículo 
+[ ] mudar mensagem da ocorrencia pra deixar claro q esta pedindo reforço
+[ ] suspeito entrou no carro não pode sair mais
+[ ] NPC deve ir no banco de trás.
+[ ] quando for levar o npc pra dp, fazer ele entrar no carro primeiro, permitindo q o jogador entre depois
+[ ] descer do carro ao chegar na DP
+[ ] OCORRÊNCIA DE MANDATO DE PRISÃO 
+[ ] FAZER PERGUNTAS AO PRESO IGUAL NO LSPDFR DO GTA 5 (Essa droga é sua?, mora aonde?, Esse carro é seu?, Já foi preso ou tem passagem)
+
+---------------------------
+Other suggestions / todo:
+
+-------------
+
+tested SAUtils
+1.6			( GTA SA 2.0: OK | SAMP: ?? )
+1.5.1		?
+1.4.1		( GTA SA 2.0: OK | SAMP: ?? )
+1.4			?
+1.3.1       ?
+
+tested AML (and headers)
+1.2.1		( GTA SA 2.0: OK | SAMP: ??, HEADERS: ?? )
+1.2			no files
+1.1			?
+1.0.3.1		( GTA SA 2.0: OK | SAMP: ??, HEADERS: OK)
+1.0.3		?
+1.0.2.2		?
+1.0.2.1		?
+1.0.2		?
+1.0.1		? 
+1.0.0.6
+1.0.0.0
+
+tested CLEO
+2.0.1.3		( GTA SA 2.0: OK | SAMP: ?? )
+2.0.1.2		?
+2.0.1.1		?
+2.0.1		?
+
+-----------
+Tested on androids:
+
+Android 12 (me)
+Android 14 (Plucas)
+
+-----------
+
+To update AML
+
+go to https://github.com/RusJJ/AndroidModLoader
+download project
+copy files from 'mod' to 'GTASA_libGiroflexVSL\CLEOMod\mod'
