@@ -43,6 +43,90 @@ std::vector<std::string> get_directories_name(const std::string& s)
 
 //
 
+std::vector<VersionInfo*> VersionControl::m_Versions;
+std::string VersionControl::m_PrevVersion = "";
+std::string VersionControl::m_CurrentVersion = "";
+
+void VersionControl::SetVersion(std::string prevVersion, std::string currentVersion)
+{
+    m_PrevVersion = prevVersion;
+    m_CurrentVersion = currentVersion;
+}
+
+void VersionControl::AddVersion(std::string version)
+{
+    VersionInfo* info = new VersionInfo();
+    info->version = version;
+
+    m_Versions.push_back(info);
+}
+
+VersionInfo* VersionControl::GetVersionInfo(std::string version)
+{
+    for(auto info : m_Versions)
+    {
+        if(info->version == version) return info;
+    }
+    return NULL;
+}
+
+void VersionControl::AddPatch(std::string version, std::function<void()> patch)
+{
+    VersionInfo* info = GetVersionInfo(version);
+    info->patches.push_back(patch);
+}
+
+void VersionControl::ApplyPatches()
+{
+    Log::Level(LOG_LEVEL::LOG_BOTH) << "VersionControl: ApplyPatches" << std::endl;
+
+    auto prevVersion = m_PrevVersion;
+    VersionInfo* prevInfo = NULL;
+
+    if(prevVersion == m_CurrentVersion)
+    {
+        Log::Level(LOG_LEVEL::LOG_BOTH) << "VersionControl: Same version, no need to apply patches" << std::endl;
+        return;
+    }
+
+    if(prevVersion == "unknown")
+    {
+        Log::Level(LOG_LEVEL::LOG_BOTH) << "VersionControl: Version is unknown, so its the first time run, no need to apply patches" << std::endl;
+        return;
+    }
+
+    int index = 0;
+    for(auto info : m_Versions)
+    {
+        if(info->version == prevVersion)
+        {
+            prevInfo = info;
+            break;
+        }
+
+        index++;
+    }
+
+    while (index < m_Versions.size() - 1)
+    {
+        prevInfo = m_Versions[index];
+
+        Log::Level(LOG_LEVEL::LOG_BOTH) << "VersionControl: Processing index " << index << ", version " << prevInfo->version << std::endl;
+
+        for(auto patch : prevInfo->patches)
+        {
+            patch();
+        }
+        prevInfo->patches.clear();
+
+        index++;
+    }
+}
+
+//
+
+std::string ModConfig::m_ConfigMainFolderName = "menuBase";
+
 void ModConfig::MakePaths()
 {
     CreateFolder(GetConfigFolder());
@@ -79,7 +163,7 @@ void ModConfig::ConfigDeleteFile(std::string path)
 std::string ModConfig::GetConfigFolder()
 {
     char path[0xFF];
-    snprintf(path, sizeof(path), "%s/modPolicia", aml->GetConfigPath());
+    snprintf(path, sizeof(path), "%s/%s", aml->GetConfigPath(), m_ConfigMainFolderName.c_str());
     return path;
 }
 
@@ -188,6 +272,13 @@ std::string ModConfig::ReadVersionFile()
     return prevVersion;
 }
 
+void ModConfig::DefineVersions()
+{
+    VersionControl::AddVersion("1.0.0");
+
+    VersionControl::SetVersion(ReadVersionFile(), Mod::m_Version);
+}
+
 void ModConfig::ProcessVersionChanges_PreConfigLoad()
 {
     std::string prevVersion = ReadVersionFile();
@@ -195,18 +286,13 @@ void ModConfig::ProcessVersionChanges_PreConfigLoad()
 
     Log::Level(LOG_LEVEL::LOG_BOTH) << "ModConfig: [PRE] Updating from " << prevVersion << " to " << currentVersion << std::endl;
 
-    if (prevVersion == currentVersion) return;
-
-    //-------------
-
     /*
-    if (prevVersion == "2.0.0-example")
-    {
-        prevVersion = "2.0.1";
-    }
+    VersionControl::AddPatch("1.0.1", [] () {
+        Log::Level(LOG_LEVEL::LOG_BOTH) << "Patch 1" << std::endl;
+    });
     */
 
-    //-------------
+    VersionControl::ApplyPatches();
 }
 
 void ModConfig::ProcessVersionChanges_PostConfigLoad()
@@ -216,18 +302,17 @@ void ModConfig::ProcessVersionChanges_PostConfigLoad()
 
     Log::Level(LOG_LEVEL::LOG_BOTH) << "ModConfig: [POST] Updating from " << prevVersion << " to " << currentVersion << std::endl;
     
-    if (prevVersion == currentVersion) return;
-
-    //-------------
+    //patches
 
     /*
-    if (prevVersion == "2.0.0-example")
-    {
-        prevVersion = "2.0.1";
-    }
+    VersionControl::AddPatch("1.0.2", [] () {
+        Log::Level(LOG_LEVEL::LOG_BOTH) << "Patch 1.0.2 POST" << std::endl;
+    });
     */
 
-    //-------------
+    VersionControl::ApplyPatches();
+
+    //
 
     Log::Level(LOG_LEVEL::LOG_BOTH) << "ModConfig: Saving version file" << std::endl;
 

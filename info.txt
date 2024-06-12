@@ -3,6 +3,8 @@ To release
 
 Check logs
 Check Mod::m_Version
+Check MYMODCFG version in main.cpp
+Add version to ModConfig::DefineVersions
 Check EN and PT .fxt
 Check .fxt mod version (EN and PT)
 Check game more than once to make sure

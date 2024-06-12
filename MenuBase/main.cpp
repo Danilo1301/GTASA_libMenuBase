@@ -12,7 +12,7 @@
 
 // ---------------------------------------
 
-MYMODCFG(net.danilo1301.menuBase, MenuBase, Mod::m_Version, Danilo1301)
+MYMODCFG(net.danilo1301.menuBase, MenuBase, 1.0.0, Danilo1301)
 
 // ---------------------------------------
 
@@ -77,6 +77,7 @@ extern "C" void OnModPreLoad()
     Log::Level(LOG_LEVEL::LOG_BOTH) << "Preload()" << std::endl;
     Log::Level(LOG_LEVEL::LOG_BOTH) << "AML headers: 1.0.3.1" << std::endl;
 
+
     logger->SetTag("MenuBase");
 
     logger->Info("Preload");
@@ -86,7 +87,7 @@ extern "C" void OnModLoad()
 {
     Log::Level(LOG_LEVEL::LOG_BOTH) << "Load()" << std::endl;
 
-    cfgMenuOffsetX = cfg->Bind("menu_offset_x", -195, "General");
+    cfgMenuOffsetX = cfg->Bind("menu_offset_x", -195, "General"); cfg->ClearLast();
 
     Menu::m_MenuOffset.x = (float)cfgMenuOffsetX->GetInt();
 
@@ -95,6 +96,7 @@ extern "C" void OnModLoad()
     //cfg->Bind("GitHub", "", "About")->SetString("https://github.com/Danilo1301/"); cfg->ClearLast();
     cfg->Save();
 
+    
     //CLEO
     Log::Level(LOG_LEVEL::LOG_BOTH) << "Loading CLEO..." << std::endl;
     cleo = (cleo_ifs_t*)GetInterface("CLEO");
@@ -135,6 +137,7 @@ extern "C" void OnModLoad()
         Log::Level(LOG_LEVEL::LOG_BOTH) << "BASS loaded: " << BASS << std::endl;
     }
 
+    
     Log::Level(LOG_LEVEL::LOG_BOTH) << "----------------------------" << std::endl;
     Log::Level(LOG_LEVEL::LOG_BOTH) << "Mod: v" << Mod::m_Version << std::endl;
     Log::Level(LOG_LEVEL::LOG_BOTH) << "Menu: v" << Menu::m_Version << std::endl;
@@ -164,7 +167,7 @@ extern "C" void OnModLoad()
     SET_TO(camera, cleo->GetMainLibrarySymbol("TheCamera"));
     SET_TO(userPaused, cleo->GetMainLibrarySymbol("_ZN6CTimer11m_UserPauseE"));
     SET_TO(codePaused, cleo->GetMainLibrarySymbol("_ZN6CTimer11m_CodePauseE"));
-
+    
     //
     
     Log::Level(LOG_LEVEL::LOG_BOTH) << "vecCachedPos: x " << m_vecCachedPos->x << ", y " << m_vecCachedPos->y << std::endl;
@@ -187,6 +190,7 @@ extern "C" void OnModLoad()
     __reg_op_func(MENU_ADD_BUTTON, MENU_ADD_BUTTON);
     __reg_op_func(MENU_IS_BUTTON_JUST_PRESSED, MENU_IS_BUTTON_JUST_PRESSED);
     
+    ModConfig::DefineVersions();
     ModConfig::ProcessVersionChanges_PreConfigLoad();
     ModConfig::Load();
     ModConfig::ProcessVersionChanges_PostConfigLoad();
